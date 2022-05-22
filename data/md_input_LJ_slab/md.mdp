@@ -1,0 +1,78 @@
+; RUN LJ vapour 
+;cutoff-scheme = Verlet
+
+; VARIOUS PREPROCESSING OPTIONS
+title                    = Yo
+cpp                      = /lib/cpp
+include                  = 
+define                   = 
+
+; RUN CONTROL PARAMETERS
+integrator               = md
+; Start time and timestep in ps
+tinit                    = 0
+dt                       = 0.005
+nsteps                   = 100000000
+; For exact run continuation or redoing part of a run
+init_step                = 0
+; mode for center of mass motion removal
+;comm-mode                = Linear
+; number of steps for center of mass motion removal
+;nstcomm                  = 1
+; group(s) for center of mass motion removal
+;comm-grps                = 
+
+; OUTPUT CONTROL OPTIONS
+; Output frequency for coords (x), velocities (v) and forces (f)
+nstxout                  = 10000
+nstvout                  = 10000
+nstfout                  = 0
+; Checkpointing helps you continue after crashes
+nstcheckpoint            = 1000
+; Output frequency for energies to log file and energy file
+nstlog                   = 1000
+nstenergy                = 1000
+; Output frequency and precision for xtc file
+nstxtcout                = 1000
+xtc-precision            = 1000
+; This selects the subset of atoms for the xtc file. You can
+; select multiple groups. By default all atoms will be written.
+xtc-grps                 = 
+; Selection of energy groups
+energygrps               = System
+
+; NEIGHBORSEARCHING PARAMETERS
+; nblist update frequency
+nstlist                  = 5
+; ns algorithm (simple or grid)
+ns_type                  = grid
+; Periodic boundary conditions: xyz (default), no (vacuum)
+; or full (infinite systems only)
+pbc                      = xyz
+; nblist cut-off        
+rlist                    = 1.7025 
+
+; OPTIONS FOR ELECTROSTATICS AND VDW
+; Method for doing electrostatics
+coulombtype              = Cut-off
+rcoulomb-switch          = 0
+rcoulomb                 = 1.7025 
+; Method for doing Van der Waals
+vdw-type                 = Cut-off
+; cut-off lengths       
+rvdw-switch              = 0
+rvdw                     = 1.7025 
+
+; Temperature coupling  
+Tcoupl                   = v-rescale 
+; Groups to couple separately
+tc-grps                  = System
+; Time constant (ps) and reference temperature (K)
+tau_t                    = 0.1
+ref_t                    = 100
+
+; GENERATE VELOCITIES FOR STARTUP RUN
+gen_vel                  = yes
+gen_temp                 = 100 
+gen_seed                 = -1
+
