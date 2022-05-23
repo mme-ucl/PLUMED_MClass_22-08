@@ -69,10 +69,13 @@ Tcoupl                   = v-rescale
 tc-grps                  = System
 ; Time constant (ps) and reference temperature (K)
 tau_t                    = 0.1
-ref_t                    = 100
+ref_t                    = 100 
 
 ; GENERATE VELOCITIES FOR STARTUP RUN
 gen_vel                  = yes
-gen_temp                 = 100 
+gen_temp                 = 50 
 gen_seed                 = -1
+
+freezegrps = Wall 
+freezedim = Y Y Y
 
