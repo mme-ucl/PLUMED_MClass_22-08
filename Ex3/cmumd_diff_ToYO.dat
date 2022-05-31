@@ -1,0 +1,22 @@
+# Define groups of atoms
+lj: GROUP ATOMS=1-1000:1 
+
+# Provide parameters for the CV
+left:  CMUMD GROUP=lj NSV=1 FIXED=0.5 DCR=0.25 CRSIZE=0.1 WF=0.0001  ASYMM=-1 NINT=0.1 NZ=291
+right:  CMUMD GROUP=lj NSV=1 FIXED=0.5 DCR=0.25 CRSIZE=0.1 WF=0.0001  ASYMM=1 NINT=0.1 NZ=291
+
+# CmuMD is implemented as a restraint on the densities of species in CR
+rleft:  RESTRAINT ARG=left AT=3.5 KAPPA=1000.0 
+rright: RESTRAINT ARG=right AT=0.05 KAPPA=2000.0 
+
+# Report the densities and bias
+PRINT ...
+ARG=left,right,rleft.bias,rright.bias
+STRIDE=10
+FILE=CMUMD_ToYO_log
+... PRINT
+
+
+
+
+

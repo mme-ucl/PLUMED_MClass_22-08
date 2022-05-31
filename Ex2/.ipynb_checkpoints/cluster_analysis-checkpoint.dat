@@ -1,0 +1,21 @@
+# Identify liquid-like atoms
+lq: COORDINATIONNUMBER SPECIES=1-10000 SWITCH={CUBIC D_0=0.45  D_MAX=0.55} MORE_THAN={RATIONAL R_0=5.0 D_MAX=10.0}
+
+# Define a contact matrix & perfom DFS clustering 
+cm: CONTACT_MATRIX ATOMS=lq  SWITCH={CUBIC D_0=0.45  D_MAX=0.55}                      
+dfs: DFSCLUSTERING MATRIX=cm       
+
+# Compute the size of the four largest clusters
+cluster_1: CLUSTER_NATOMS CLUSTERS=dfs CLUSTER=1 
+cluster_2: CLUSTER_NATOMS CLUSTERS=dfs CLUSTER=2
+cluster_3: CLUSTER_NATOMS CLUSTERS=dfs CLUSTER=3
+cluster_4: CLUSTER_NATOMS CLUSTERS=dfs CLUSTER=4
+
+# Compute the number of clusters  
+nclust: CLUSTER_DISTRIBUTION CLUSTERS=dfs MORE_THAN={GAUSSIAN D_0=4.95 R_0=0.01 D_MAX=4.99}
+
+# PRINT to file
+PRINT ARG=lq.morethan,nclust.*,cluster_1,cluster_2,cluster_3,cluster_4 STRIDE=1  FILE=clusters.dat
+
+FLUSH STRIDE=1
+              
