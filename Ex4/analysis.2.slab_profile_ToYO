@@ -1,5 +1,5 @@
 #! FIELDS z dens1.dens ddens1.dens_z
-#! SET normalisation  3.000000
+#! SET normalisation  2.000000
 #! SET min_z -11
 #! SET max_z 11
 #! SET nbins_z  100

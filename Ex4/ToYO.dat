@@ -4,6 +4,11 @@ REF: FIXEDATOM AT=0,0,11
 lq: COORDINATIONNUMBER SPECIES=1001-2000 SWITCH={CUBIC D_0=0.45  D_MAX=0.55} MORE_THAN={RATIONAL R_0=5.0 D_MAX=5.1}
 
 ads: AROUND DATA=lq ATOM=REF ZLOWER=-3.0 ZUPPER=3.0 SIGMA=0.1 MORE_THAN={RATIONAL R_0=5.0 D_MAX=5.1}
+res1: AROUND DATA=lq ATOM=REF ZLOWER=10.0 ZUPPER=11.0 SIGMA=0.1 MORE_THAN={RATIONAL R_0=5.0 D_MAX=5.1}
+res2: AROUND DATA=lq ATOM=REF ZLOWER=-11.0 ZUPPER=-10.0 SIGMA=0.1 MORE_THAN={RATIONAL R_0=5.0 D_MAX=5.1}
+
+res: MATHEVAL ARG=res1.morethan,res2.morethan FUNC=x+y PERIODIC=NO
+
 
 # Define a contact matrix & perfom DFS clustering 
 cm: CONTACT_MATRIX ATOMS=ads  SWITCH={CUBIC D_0=0.45  D_MAX=0.55}                      
@@ -25,4 +30,4 @@ grid: MULTICOLVARDENS ORIGIN=REF DATA=dens2 DIR=z NBINS=100 BANDWIDTH=0.25 STRID
 DUMPGRID GRID=slab STRIDE=500 FILE=slab_profile_ToYO
 DUMPGRID GRID=grid STRIDE=500 FILE=density_profile_ToYO
 
-PRINT ARG=lq.morethan,ads.*,nclust.*,cluster_1,cluster_2 STRIDE=1  FILE=slab_analysis_ToYO.dat
+PRINT ARG=lq.morethan,ads.*,res,nclust.*,cluster_1,cluster_2 STRIDE=1  FILE=slab_analysis_ToYO.dat
